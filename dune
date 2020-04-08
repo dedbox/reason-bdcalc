@@ -1,0 +1,8 @@
+(executable
+ (name bdcalc)
+ (libraries camomile)
+ (modes (best exe) js))
+
+(ocamllex (modules lexer))
+
+(menhir (modules parser))
