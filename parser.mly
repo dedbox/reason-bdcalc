@@ -7,35 +7,40 @@
 
 %right ARROW
 
-%start <HExpr.t> main
+%start <HExpr.t> top
+%start <HType.t> typ_top
 
 %{
     open HExpr;;
     open HType;;
+
 %}
 
 %%
 
-main:
-  | expr EOF     { $1 }
+top:
+  | e=expr EOF  { e }
+
+typ_top:
+  | t=typ EOF  { t }
 
 expr:
-  | SLASH SYM DOT expr  { Fun($2, $4) }
-  | IF atom atom atom   { If($2, $3, $4) }
-  | appexpr             { $1 }
+  | SLASH x=SYM DOT e=expr      { Fun(x, e) }
+  | IF e1=atom e2=atom e3=atom  { If(e1, e2, e3) }
+  | appexpr                     { $1 }
 
 appexpr:
-  | appexpr atom  { App($1, $2) }
-  | atom          { $1 }
+  | e1=appexpr e2=atom  { App(e1, e2) }
+  | atom                { $1 }
 
 atom:
-  | atom COLON typ      { Ann($1, $3) }
-  | SYM                 { Var($1) }
+  | e=atom COLON t=typ  { Ann(e, t) }
+  | x=SYM               { Var(x) }
   | TRUE                { Tru }
   | FALSE               { Fls }
   | LPAREN expr RPAREN  { $2 }
 
 typ:
-  | BOOL               { TBool }
-  | typ ARROW typ      { TFun($1, $3) }
-  | LPAREN typ RPAREN  { $2 }
+  | BOOL                 { TBool }
+  | t1=typ ARROW t2=typ  { TFun(t1, t2) }
+  | LPAREN typ RPAREN    { $2 }

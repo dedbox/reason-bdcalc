@@ -1,12 +1,17 @@
 {
   open Parser
+
+  exception Error of string
+
 }
 
-let spc = [' ']+
-let str = ['a'-'z']+
+let spc = [' ' '\t']+
+let sym = ['a'-'z']+
+let endl = '\r' | '\n' | "\r\n"
 
 rule read = parse
   | spc       { read lexbuf }
+  | endl      { Lexing.new_line lexbuf; read lexbuf }
   | "->"      { ARROW }
   | ":"       { COLON }
   | "Bool"    { BOOL }
@@ -17,5 +22,6 @@ rule read = parse
   | "true"    { TRUE }
   | "false"   { FALSE }
   | "if"      { IF }
-  | str as x  { SYM x }
+  | sym as x  { SYM x }
   | eof       { EOF }
+  | _  { raise (Error ("Unexpected char: " ^ Lexing.lexeme lexbuf)) }

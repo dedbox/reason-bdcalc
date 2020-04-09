@@ -1,6 +1,6 @@
 (executable
  (name bdcalc)
- (libraries camomile)
+ (libraries camomile re)
  (modes (best exe) js))
 
 (ocamllex (modules lexer))
