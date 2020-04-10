@@ -60,38 +60,3 @@ let rec repl = ctx => {
 };
 
 repl(StringMap.empty);
-
-/******************************************************************************/
-/* Tests                                                                      */
-/******************************************************************************/
-
-/* printf("%a@.", HExpr.pp, App(App(Var("x"), Var("y")), Var("z"))); */
-/* printf("%a@.", HExpr.pp, App(Var("x"), App(Var("y"), Var("z")))); */
-/* printf( */
-/*   "%a@.", */
-/*   HExpr.pp, */
-/*   App( */
-/*   App( */
-/*     App(App(Var("x"), Var("y")), App(Var("z"), Var("w"))), */
-/*     Var("v"), */
-/*   ), */
-/*   Var("u"), */
-/* ), */
-/* ); */
-
-/* printf("%a@.", HExpr.pp, parse("\\f.\\x.\\y.f x y z")); */
-/* printf("%a@.", HExpr.pp, parse("\\f.\\x.\\y.f x (y z)")); */
-/* printf("%a@.", HExpr.pp, parse("true : Bool")); */
-/* printf("%a@.", HExpr.pp, parse("(\\x.x) : Bool -> Bool")); */
-/* printf("%a@.", HExpr.pp, parse("(\\x.x) a : Bool")); */
-/* printf("%a@.", HExpr.pp, parse("((\\x.x) a) : Bool")); */
-/* printf( */
-/*   "%a@.", */
-/*   HExpr.pp, */
-/*   parse("(\\x.\\y.x y) : Bool -> Bool -> Bool"), */
-/* ); */
-/* printf( */
-/*   "%a@.", */
-/*   HExpr.pp, */
-/*   parse("(\\x.x true) : (Bool -> Bool) -> Bool"), */
-/* ); */
