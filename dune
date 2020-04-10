@@ -1,6 +1,6 @@
 (library
  (name bdcalc)
-  (libraries camomile re)
+ (libraries camomile re)
  (modules Ast Lexer Parser Semantics Syntax))
 
 (ocamllex (modules lexer))
