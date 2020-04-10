@@ -7,12 +7,13 @@
 
 %right ARROW
 
-%start <HExpr.t> top
-%start <HType.t> typ_top
+%start <Ast.HExpr.t> top
+%start <Ast.HType.t> typ_top
 
 %{
-    open HExpr;;
-    open HType;;
+
+    open Ast.HExpr;;
+    open Ast.HType;;
 
 %}
 

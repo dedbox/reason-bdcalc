@@ -1,8 +1,18 @@
-(executable
+(library
  (name bdcalc)
- (libraries camomile re)
- (modes (best exe) js))
+  (libraries camomile re)
+ (modules Ast Lexer Parser Semantics Syntax))
 
 (ocamllex (modules lexer))
-
 (menhir (modules parser))
+
+(executable
+ (name repl)
+ (libraries bdcalc)
+ (modes (best exe) js)
+ (modules Repl))
+
+(test
+ (name tests)
+ (libraries alcotest bdcalc)
+ (modules Tests))
